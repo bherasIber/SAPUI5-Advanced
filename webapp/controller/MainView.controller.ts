@@ -53,7 +53,7 @@ export default class MainView extends Controller {
         oView?.setModel(oJSONModel);
     }
 
-    public onFilter(): void {
+    public onFilter(): void { 
         const oJSON = this.getView()?.getModel()?.getData();
         var filters = [];
 
