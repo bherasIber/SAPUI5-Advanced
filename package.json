@@ -8,23 +8,25 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {},
+  "dependencies": {
+    "@types/openui5": "^1.129.0"
+  },
   "devDependencies": {
-    "@ui5/cli": "^3.0.0",
-    "@sap/ux-ui5-tooling": "1",
-    "@sap-ux/eslint-plugin-fiori-tools": "^0.4.0",
-    "eslint": "8.57.0",
-    "eslint-plugin-fiori-custom": "2.6.7",
     "@babel/eslint-parser": "7.14.7",
-    "@sapui5/types": "~1.129.0",
-    "ui5-tooling-transpile": "^3.3.7",
-    "typescript": "^5.1.6",
-    "@typescript-eslint/eslint-plugin": "^7.1.1",
-    "@typescript-eslint/parser": "^7.1.1",
+    "@sap-ux/eslint-plugin-fiori-tools": "^0.4.0",
     "@sap-ux/ui5-middleware-fe-mockserver": "2",
     "@sap/ui5-builder-webide-extension": "^1.1.9",
+    "@sap/ux-ui5-tooling": "1",
+    "@sapui5/types": "~1.129.0",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "@ui5/cli": "^3.0.0",
+    "eslint": "8.57.0",
+    "eslint-plugin-fiori-custom": "2.6.7",
+    "mbt": "^1.2.27",
+    "typescript": "^5.1.6",
     "ui5-task-zipper": "^3.1.3",
-    "mbt": "^1.2.27"
+    "ui5-tooling-transpile": "^3.3.7"
   },
   "scripts": {
     "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#logaligroupemployees-display\"",
