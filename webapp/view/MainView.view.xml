@@ -44,7 +44,9 @@
                         </columns>
                         <items>
                             <ColumnListItem id="columnListItem"
-                                vAlign="Inherit"
+                                vAlign="Inherit" 
+                                type="Active"
+                                press="showPostalCode"
                             >
                                 <cells>
                                     <Label id="labelID" text="{EmployeeID}"/>

@@ -6,11 +6,21 @@ import JSONModel from "sap/ui/model/json/JSONModel";
 import ResourceModel from "sap/ui/model/resource/ResourceModel"; // Asegúrate de importar ResourceModel
 import FilterOperator from "sap/ui/model/FilterOperator";
 import Filter from "sap/ui/model/Filter";
+import MessageToast from "sap/m/MessageToast";
 
 
 interface ICustomResourceBundle {
     getText(key: string, args?: unknown[]): string;  // Definir el método getText
 }
+
+/**
+ * @param {typeof sap.ui.core.mvd.Controller} Controller
+ * @param {typeof sap.ui.model.json.JSONModel} JSONModel
+ * @param {typeof sap.ui.model.resource.ResourceModel} ResourceModel
+ * @param {typeof sap.ui.model.Filter} Filter
+ * @param {typeof sap.ui.model.FilterOperator} FilterOperator
+ * @param {typeof sap.m.MessageToast} MessageToast
+ */
 
 /**
  * @namespace logaligroup.employees.controller
@@ -77,6 +87,14 @@ export default class MainView extends Controller {
         oModel?.setProperty("/CountryKey", "");
     }
 
+    public showPostalCode(oEvent: any): void {
+        const itemPressed = oEvent.getSource();
+        const oContext = itemPressed.getBindingContext();
+        const objectContext = oContext.getObject();
+
+        MessageToast.show(objectContext.PostalCode);
+    }
+    
     public onValidate(): void {
         const inputEmployee = this.byId("inputEmployee") as Input;
 
