@@ -28,51 +28,43 @@ interface ICustomResourceBundle {
 export default class MainView extends Controller {
     /*eslint-disable @typescript-eslint/no-empty-function*/
     public onInit(): void {
-        const oJSONModel = new JSONModel(); 
         const oView = this.getView();
         
         // Castea el modelo de i18n a ResourceModel para acceder a getResourceBundle
-        const i18nModel = oView?.getModel("i18n") as ResourceModel; 
-        const i18nBundle = i18nModel?.getResourceBundle() as ICustomResourceBundle; // Ahora esto debería funcionar
+        //const i18nModel = oView?.getModel("i18n") as ResourceModel; 
+        //const i18nBundle = i18nModel?.getResourceBundle() as ICustomResourceBundle; // Ahora esto debería funcionar
 
-        // const oJSON = {
-        //     employeeId: "12345",
-        //     countryKey: "UK",
-        //     listCountry: [
-        //         {
-        //             key: "US",
-        //             text: i18nBundle ? i18nBundle.getText("countryUS") : "United States" // Valor por defecto
-        //         },
-        //         {
-        //             key: "UK",
-        //             text: i18nBundle ? i18nBundle.getText("countryUK") : "United Kingdom" // Valor por defecto
-        //         },
-        //         {
-        //             key: "ES",
-        //             text: i18nBundle ? i18nBundle.getText("countryES") : "Spain" // Valor por defecto
-        //         }
-        //     ]
-        // }; 
-        
-        // oJSONModel.setData(oJSON);
+        const oJSONModelEmpl = new JSONModel(); 
+        void oJSONModelEmpl.loadData("./localService/mockdata/Employees.json", false);
+        oView?.setModel(oJSONModelEmpl, "jsonEmployees");
 
-        void oJSONModel.loadData("./localService/mockdata/Employees.json");
-        // oJSONModel.attachRequestCompleted(function (oEventModel){
-        //     console.log(JSON.stringify(oJSONModel.getData()));
-        // });
-        oView?.setModel(oJSONModel);
+        const oJSONModelCountries = new JSONModel(); 
+        void oJSONModelCountries.loadData("./localService/mockdata/Countries.json", false);
+        oView?.setModel(oJSONModelCountries, "jsonCountries");
+                
+        const oJSONModelConfig = new JSONModel({
+            visibleID: true,
+            visibleName: true,
+            visibleCountry: true,
+            visibleCity: false,
+            visibleBtnShowCity: true,
+            visibleBtnHideCity: false
+        }); 
+        oView?.setModel(oJSONModelConfig, "jsonModelConfig");
+
+
     }
 
     public onFilter(): void { 
-        const oJSON = this.getView()?.getModel()?.getData();
+        const oJSONCountries = this.getView()?.getModel("jsonCountries")?.getData();
         var filters = [];
 
-        if(oJSON.EmployeeId !== ""){
-            filters.push(new Filter("EmployeeID", FilterOperator.EQ, oJSON.EmployeeId));
+        if(oJSONCountries.EmployeeId !== ""){
+            filters.push(new Filter("EmployeeID", FilterOperator.EQ, oJSONCountries.EmployeeId));
         }
 
-        if(oJSON.CountryKey !== ""){
-            filters.push(new Filter("Country", FilterOperator.EQ, oJSON.CountryKey));
+        if(oJSONCountries.CountryKey !== ""){
+            filters.push(new Filter("Country", FilterOperator.EQ, oJSONCountries.CountryKey));
         }
 
         var oList = this.getView()?.byId("tableEmployee");
@@ -82,17 +74,31 @@ export default class MainView extends Controller {
     }
 
     public onClearFilter(): void {
-        var oModel = this.getView()?.getModel();
+        var oModel = this.getView()?.getModel("jsonCountries");
         oModel?.setProperty("/EmployeeId", "");
         oModel?.setProperty("/CountryKey", "");
     }
 
     public showPostalCode(oEvent: any): void {
         const itemPressed = oEvent.getSource();
-        const oContext = itemPressed.getBindingContext();
+        const oContext = itemPressed.getBindingContext("jsonEmployees");
         const objectContext = oContext.getObject();
 
         MessageToast.show(objectContext.PostalCode);
+    }
+
+    public onShowCity(): void {
+        var oJSONModelConfig = this.getView()?.getModel("jsonModelConfig");
+        oJSONModelConfig.setProperty("/visibleCity", true);
+        oJSONModelConfig.setProperty("/visibleBtnShowCity", false);
+        oJSONModelConfig.setProperty("/visibleBtnHideCity", true);
+    }
+
+    public onHideCity(): void {
+        var oJSONModelConfig = this.getView()?.getModel("jsonModelConfig");
+        oJSONModelConfig.setProperty("/visibleCity", false);
+        oJSONModelConfig.setProperty("/visibleBtnShowCity", true);
+        oJSONModelConfig.setProperty("/visibleBtnHideCity", false);
     }
     
     public onValidate(): void {
