@@ -48,7 +48,7 @@
                             <ColumnListItem id="columnListItem"
                                 vAlign="Inherit" 
                                 type="Active"
-                                press="showPostalCode"
+                                press="showOrders"
                             >
                                 <cells>
                                     <Label id="labelID" text="{jsonEmployees>EmployeeID}"/>
@@ -59,6 +59,7 @@
                             </ColumnListItem>
                         </items>
                     </Table>
+                    <HBox id="ordersTable"></HBox>
                 </Panel>
             </HBox>
         </content>
