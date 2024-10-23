@@ -105,87 +105,28 @@ export default class MainView extends Controller {
     }
 
     public showOrders(oEvent): void {
-        var ordersTable = this.getView()?.byId("ordersTable");
-        ordersTable?.destroyItems();
+        
+        // Get selected controller
+        var iconPressed = oEvent.getSource();
 
-        var itemPressed = oEvent.getSource();
-        var oContext = itemPressed.getBindingContext("jsonEmployees");
+        // Context from the model
+        var oContext = iconPressed.getBindingContext("jsonEmployees");
 
-        var objectContext = oContext.getObject();
-        var orders = objectContext.Orders;
-
-        var ordersItems = [];
-
-        for (var i in orders) {
-            ordersItems.push(new ColumnListItem({
-                cells: [
-                    new Label({ text: orders[i].OrderID}),
-                    new Label({ text: orders[i].Freight}),
-                    new Label({ text: orders[i].ShipAddress})
-                ]
-            }));
+        if(!this._oDialogOrders) {
+            this._oDialogOrders = sap.ui.xmlfragment("logaligroup.employees.fragment.DialogOrders", this);
+            this.getView()?.addDependent(this._oDialogOrders);
         }
 
-        var newTable = new Table({
-            width: "auto",
-            columns: [
-                new Column({header: new Label({text: "{i18n>orderID}"})}),
-                new Column({header: new Label({text: "{i18n>freight}"})}),
-                new Column({header: new Label({text: "{i18n>shipAddress}"})})
-            ],
-            items: ordersItems
-        }).addStyleClass("sapUiSmallMargin");
+        //Dialog binding to the context to have access to data of selected item
+        this._oDialogOrders.bindElement("jsonEmployees>" + oContext.getPath());
 
-        ordersTable?.addItem(newTable);
-
-
-        var newTableJSON = new Table();
-        newTableJSON.setWidth("auto");
-        newTableJSON.addStyleClass("sapUiSmallMargin");
-
-        var columnOrderID = new Column();
-        var labelOrderID = new Label();
-        labelOrderID.bindProperty("text","i18n>orderID");
-        columnOrderID.setHeader(labelOrderID);
-        newTableJSON.addColumn(columnOrderID);
+        this._oDialogOrders.open();
         
-        var columnFreight = new Column();
-        var labelFreight = new Label();
-        labelFreight.bindProperty("text","i18n>freight");
-        columnFreight.setHeader(labelFreight);
-        newTableJSON.addColumn(columnFreight);
 
-        var columnShipAddress = new Column();
-        var labelShipAddress = new Label();
-        labelShipAddress.bindProperty("text","i18n>shipAddress");
-        columnShipAddress.setHeader(labelShipAddress);
-        newTableJSON.addColumn(columnShipAddress);
+    }
 
-        var columnListItem = new ColumnListItem();
-
-        var cellOrderID = new Label();
-        cellOrderID.bindProperty("text","jsonEmployees>OrderID");
-        columnListItem.addCell(cellOrderID);
-
-        var cellFreight = new Label();
-        cellFreight.bindProperty("text","jsonEmployees>Freight");
-        columnListItem.addCell(cellFreight);
-
-        var cellShipAddress = new Label();
-        cellShipAddress.bindProperty("text","jsonEmployees>ShipAddress");
-        columnListItem.addCell(cellShipAddress);
-
-        var oBindingInfo = {
-            model: "jsonEmployees",
-            path: "Orders",
-            template: columnListItem
-        };
-
-        newTableJSON.bindAggregation("items", oBindingInfo);
-        newTableJSON.bindElement("jsonEmployees>" + oContext.getPath());
-
-        ordersTable?.addItem(newTableJSON);
-
+    public onCloseOrders() {
+        this._oDialogOrders.close();
     }
     
     public onValidate(): void {
