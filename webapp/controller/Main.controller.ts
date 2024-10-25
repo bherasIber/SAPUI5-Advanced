@@ -34,6 +34,15 @@ export default class Main extends Controller {
             visibleBtnHideCity: false
         }); 
         oView?.setModel(oJSONModelConfig, "jsonModelConfig");
+
+        this._bus = sap.ui.getCore().getEventBus();
+        this._bus.subscribe("flexible", "showEmployee", this.showEmployeeDetails, this);
+    }
+
+    public showEmployeeDetails(category, nameEvent, path): void {
+        var detailView = this.getView()?.byId("detailEmployeeView");
+        detailView?.bindElement("jsonEmployees>" + path);
+        this.getView()?.getModel("jsonLayouts")?.setProperty("/ActiveKey", "TwoColumnsMidExpanded");
     }
 
 }

@@ -79,7 +79,8 @@
             <items>
                 <ColumnListItem
                     id="columnListItem"
-                    vAlign="Inherit"
+                    type="Navigation" 
+                    press="showEmployee"
                 >
                     <cells>
                         <Label

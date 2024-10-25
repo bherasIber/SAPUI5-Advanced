@@ -5,7 +5,7 @@
 	xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
 	displayBlock="true"
-	height="100%"
+	height="80%"
 	busyIndicatorDelay="0"
 >
     <Page id="pageMain" showHeader="false">

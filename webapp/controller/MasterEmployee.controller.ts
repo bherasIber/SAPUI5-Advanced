@@ -32,7 +32,7 @@ export default class MasterEmployee extends Controller {
     /*eslint-disable @typescript-eslint/no-empty-function*/
     public onInit(): void {
         
-
+        this._bus = sap.ui.getCore().getEventBus();
 
     }
 
@@ -105,6 +105,13 @@ export default class MasterEmployee extends Controller {
 
     public onCloseOrders() {
         this._oDialogOrders.close();
+    }
+
+    public showEmployee(oEvent) {
+
+        var path = oEvent.getSource().getBindingContext("jsonEmployees").getPath();
+        this._bus.publish("flexible", "showEmployee", path);
+
     }
     
     public onValidate(): void {
