@@ -41,7 +41,7 @@ export default class Main extends Controller {
 
     public showEmployeeDetails(category, nameEvent, path): void {
         var detailView = this.getView()?.byId("detailEmployeeView");
-        detailView?.bindElement("jsonEmployees>" + path);
+        detailView?.bindElement("odataNorthwind>" + path);
         this.getView()?.getModel("jsonLayouts")?.setProperty("/ActiveKey", "TwoColumnsMidExpanded");
 
         var incidenceModel = new sap.ui.model.json.JSONModel([]);

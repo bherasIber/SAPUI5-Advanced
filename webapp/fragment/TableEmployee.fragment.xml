@@ -17,7 +17,7 @@
         />
         <Table
             id="tableEmployee"
-            items="{jsonEmployees>/Employees}"
+            items="{odataNorthwind>/Employees}"
         >
             <columns>
                 <Column
@@ -85,19 +85,19 @@
                     <cells>
                         <Label
                             id="labelID"
-                            text="{jsonEmployees>EmployeeID}"
+                            text="{odataNorthwind>EmployeeID}"
                         />
                         <Label
                             id="labelNameC"
-                            text="{jsonEmployees>LastName}, {jsonEmployees>FirstName}"
+                            text="{odataNorthwind>LastName}, {odataNorthwind>FirstName}"
                         />
                         <Label
                             id="labelCountryC"
-                            text="{jsonEmployees>Country}"
+                            text="{odataNorthwind>Country}"
                         />
                         <Label
                             id="labelCityC"
-                            text="{jsonEmployees>City}"
+                            text="{odataNorthwind>City}"
                         />
                         <core:Icon id="icon" src="sap-icon://show" press="showOrders"></core:Icon>
                     </cells>
