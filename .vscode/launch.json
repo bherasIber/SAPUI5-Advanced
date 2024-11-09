@@ -3,28 +3,28 @@
   "configurations": [
     {
       "name": "employees-config1",
+      "type": "node",
+      "request": "launch",
       "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
       "runtimeArgs": [
         "fiori",
         "run"
       ],
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "npx",
       "args": [
         "--open",
         "index.html"
       ],
-      "windows": {
-        "runtimeExecutable": "npx.cmd"
-      },
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "outputCapture": "std",
       "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/SAPUI5-Expert/employees\"}",
-        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"destination\":\"Northwind\",\"url\":\"https://services.odata.org\",\"path\":\"/v2\"}]",
-        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/v2\",\"url\":\"https://services.odata.org\",\"destination\":\"Northwind\"}]"
       }
     }
   ]
