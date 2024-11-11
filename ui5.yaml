@@ -16,12 +16,13 @@ server:
             - /test-resources
           url: https://ui5.sap.com
         backend:
+          - path: /sap
+            url: http://erp13.sap4practice.com:9037
+            client: '001'
           - path: /v2
             url: https://services.odata.org
             destination: Northwind
-          - path: /sap
-            url: http://erp13.sap4practice.com:9037
-            destination: logaligroupERP
+
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

@@ -24,7 +24,7 @@
       "env": {
         "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false",
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/SAPUI5-Expert/employees\"}",
-        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/v2\",\"url\":\"https://services.odata.org\",\"destination\":\"Northwind\"}]"
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/sap\",\"url\":\"http://erp13.sap4practice.com:9037\",\"destination\":\"Northwind\"}]"
       }
     }
   ]

@@ -1,144 +1,149 @@
 {
-  "_version": "1.65.0",
-  "sap.app": {
-    "id": "logaligroup.employees",
-    "type": "application",
-    "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
-    },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
-      "version": "1.15.1",
-      "toolsId": "e682357c-700b-44ff-9329-dd28c72b484b"
-    },
-    "dataSources": {
-      "Northwind.svc": {
-        "uri": "/v2/Northwind/Northwind.svc/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "2.0"
-        }
-      },
-      "YSAPUI5_SRV_01":{
-        "uri": "/sap/opu/odata/sap/YSAPUI5_SRV_01/",
-        "type": "OData",
-        "settings": {
-          "odataVersion": "2.0",
-          "localUri": "localService/YSAPUI5_SRV_01/metadata.xml"
-        }
-      }
-    }
-  },
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    }
-  },
-  "sap.ui5": {
-    "flexEnabled": true,
-    "dependencies": {
-      "minUI5Version": "1.129.2",
-      "libs": {
-        "sap.m": {},
-        "sap.ui.core": {}
-      }
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "logaligroup.employees.i18n.i18n"
-        }
-      },
-      "odataNorthwind": {
-        "dataSource": "Northwind.svc",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "OneWay"
-        }
-      },
-      "incidenceModel":{
-        "type": "sap.ui.model.odata.v2.ODataModel",
-        "dataSource": "YSAPUI5_SRV_01",
-        "preload": true,
-        "settings": {
-          "defaultBindingMode": "TwoWay"
-        }
-      }
-    },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "async": true,
-        "viewPath": "logaligroup.employees.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
-      },
-      "routes": [
-        {
-          "name": "RouteMainView",
-          "pattern": ":?query:",
-          "target": [
-            "TargetMainView"
-          ]
-        }
-      ],
-      "targets": {
-        "TargetMainView": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "Main",
-          "viewName": "Main"
+    "_version": "1.65.0",
+    "sap.app": {
+        "id": "logaligroup.employees",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
         },
-        "TargetMasterEmployee": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "MasterEmployee",
-          "viewName": "MasterEmployee"
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.15.1",
+            "toolsId": "e682357c-700b-44ff-9329-dd28c72b484b"
+        },
+        "dataSources": {
+            "YSAPUI5_SRV_01": {
+                "uri": "/sap/opu/odata/sap/YSAPUI5_SRV_01/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/YSAPUI5_SRV_01/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "Northwind.svc": {
+                "uri": "/v2/Northwind/Northwind.svc/",
+                "type": "OData",
+                "settings": {
+                "annotations": [],
+                "localUri": "localService/metadata.xml",
+                "odataVersion": "2.0"
+                }
+            }
         }
-      }
     },
-    "rootView": {
-      "viewName": "logaligroup.employees.view.App",
-      "type": "XML",
-      "async": true,
-      "id": "App"
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.129.2",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "logaligroup.employees.i18n.i18n"
+                }
+            },
+            "incidenceModel": {
+                "preload": true,
+                "dataSource": "YSAPUI5_SRV_01",
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Request",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "odataNorthwind": {
+                "dataSource": "Northwind.svc",
+                "preload": true,
+                "settings": {
+                "defaultBindingMode": "OneWay"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "logaligroup.employees.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteMainView",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetMainView"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetMainView": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Main",
+                    "viewName": "Main"
+                },
+                "TargetMasterEmployee": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "MasterEmployee",
+                    "viewName": "MasterEmployee"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "logaligroup.employees.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "logaligroupemployees"
     }
-  },
-  "sap.cloud": {
-    "public": true,
-    "service": "logaligroupemployees"
-  }
 }
