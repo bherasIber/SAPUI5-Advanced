@@ -38,14 +38,14 @@ server:
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
-          - path: /v2
-            url: https://services.odata.org
+          - path: /v2/northwind/northwind.svc/
+            url: https://services.odata.org/
             destination: Northwind
             authenticationType: NoAuthentication
-          - path: /sap
+          - path: /sap/opu/odata/sap/YSAPUI5_SRV_01/
             url: http://erp13.sap4practice.com:9037
             client: '001'
-            destination: ERP13
+            destination: logaligroupERP
             authenticationType: BasicAuthentication
 builder:
   customTasks:

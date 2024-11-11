@@ -20,6 +20,8 @@
                 "uri": "/v2/northwind/northwind.svc/",
                 "type": "OData",
                 "settings": {
+                    "annotations": [],
+                    "localUri": "localService/northwind/metadata.xml",
                     "odataVersion": "2.0"
                 }
             },
@@ -27,6 +29,8 @@
                 "uri": "/sap/opu/odata/sap/YSAPUI5_SRV_01/",
                 "type": "OData",
                 "settings": {
+                    "annotations": [],
+                    "localUri": "localService/YSAPUI5_SRV_01/metadata.xml",
                     "odataVersion": "2.0"
                 }
             }
@@ -68,22 +72,28 @@
                     "bundleName": "com.logaligroup.employees.i18n.i18n"
                 }
             },
-            "northwind": {
+            "": {
                 "preload": true,
                 "dataSource": "northwind",
                 "settings": {
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline",
-                    "refreshAfterChange": false
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
                 }
             },
-            "zincidence": {
+            "YSAPUI5_SRV_01": {
                 "dataSource": "YSAPUI5_SRV_01",
                 "preload": true,
                 "settings": {
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline",
-                    "refreshAfterChange": false
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
                 }
             }
         },
