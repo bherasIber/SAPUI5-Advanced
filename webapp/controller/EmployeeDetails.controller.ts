@@ -10,6 +10,7 @@ sap.ui.define([
         onInit: function () {
             this.oEventBus = sap.ui.getCore().getEventBus();
               // Variable para almacenar el fragmento
+            this._bus = sap.ui.getCore().getEventBus();
         },
 
         onCreteIncidence: function () {
@@ -47,7 +48,7 @@ sap.ui.define([
             var odata = incidenceModel.getData();
             var contextObj = rowIncidence.getBindingContext("incidenceModel");
 
-            odata.splice(contextObj.index-1,1);
+            odata.splice(contextObj.number-1,1);
             for(var i in odata){
                 odata[i].number = parseInt(i)+1;
             }
@@ -58,7 +59,7 @@ sap.ui.define([
             for(var j in tableIncidence.getContent()){
                 tableIncidence.getContent()[j].bindElement("incidenceModel>/"+j);
             }
-           
+            
         },
 
         onStatusChange: function (oEvent) {
@@ -71,6 +72,12 @@ sap.ui.define([
                 // Actualiza el status en el modelo de datos
                 oBindingContext.getModel().setProperty(oBindingContext.getPath() + "/status", sNewStatus);
             }
+        },
+
+        onSaveIncidence: function (oEvent) {
+            var incidence = oEvent.getSource().getParent();
+            var incidenceRow = incidence.getBindingContext("incidenceModel");
+            this._bus.publish("incidence", "onSaveIncidence", { incidenceRow : incidenceRow.sPath.replace('/','') });         
         }
 
     });

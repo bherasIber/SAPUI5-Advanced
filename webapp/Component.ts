@@ -1,5 +1,6 @@
 import BaseComponent from "sap/ui/core/UIComponent";
 import { createDeviceModel } from "./model/models";
+import GroupConfiguration from "sap/ui/comp/smartfilterbar/GroupConfiguration";
 
 /**
  * @namespace logaligroup.employees
@@ -25,4 +26,6 @@ export default class Component extends BaseComponent {
         // set the device model
         this.setModel(createDeviceModel(), "device");
 	}
+
+    SapId: "bheras@grupo.lacasa.es";
 }

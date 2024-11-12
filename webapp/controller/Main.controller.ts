@@ -1,11 +1,27 @@
 import Controller from "sap/ui/core/mvc/Controller";
 import JSONModel from "sap/ui/model/json/JSONModel";
+import MessageToast from "sap/m/MessageToast";
+import ResourceBundle from "sap/base/i18n/ResourceBundle";
 
+interface IncidenceData {
+    IncidenceId?: string;
+    CreationDate: Date;
+    Type: string;
+    Reason: string;
+}
 /**
  * @namespace logaligroup.employees.controller
  */
 export default class Main extends Controller {
     
+    private _bus: import("sap/ui/core/EventBus").default;
+    
+    private _detailEmployeeView: sap.ui.core.Control | undefined;
+
+    public onBeforeRendering(): void {
+        this._detailEmployeeView = this.getView()?.byId("detailEmployeeView") as sap.ui.core.Control;
+    }
+
     public onInit(): void {
         const oView = this.getView();
         
@@ -37,6 +53,7 @@ export default class Main extends Controller {
 
         this._bus = sap.ui.getCore().getEventBus();
         this._bus.subscribe("flexible", "showEmployee", this.showEmployeeDetails, this);
+        this._bus.subscribe("incidence", "onSaveIncidence", this.onSaveODataIncidence, this);
     }
 
     public showEmployeeDetails(category, nameEvent, path): void {
@@ -48,6 +65,40 @@ export default class Main extends Controller {
         detailView?.setModel(incidenceModel, "incidenceModel");
 
         detailView?.byId("tableIncidence").removeAllContent();
+    }
+
+    public onSaveODataIncidence(channelId: string, eventId: string, data: { incidenceRow: number }): void {
+        const oResourceBundle: ResourceBundle | undefined = this.getView()?.getModel("i18n")?.getResourceBundle();
+        const employeeId: string | undefined = this._detailEmployeeView?.getBindingContext("odataNorthwind")?.getObject()?.EmployeeID;
+        const incidenceModel = this._detailEmployeeView?.getModel("incidenceModel") as JSONModel;
+        const incidenceData = incidenceModel.getData() as IncidenceData[];
+
+        if (typeof incidenceData[data.incidenceRow].IncidenceId === 'undefined') {
+            const body = {
+                SapId: this.getOwnerComponent()?.SapId,
+                EmployeeId: employeeId?.toString() || "",
+                CreationDate: incidenceData[data.incidenceRow].CreationDate,
+                Type: incidenceData[data.incidenceRow].Type,
+                Reason: incidenceData[data.incidenceRow].Reason
+            };
+
+            this.getView()?.getModel("incidenceModel")?.create("/IncidentsSet", body, {
+                success: function () {
+                    if (oResourceBundle) {
+                        MessageToast.show(oResourceBundle.getText("odataSaveOK"));
+                    }
+                },
+                error: function (e: any) {
+                    if (oResourceBundle) {
+                        MessageToast.show(oResourceBundle.getText("odataSaveKO"));
+                    }
+                }
+            });
+        } else {
+            if (oResourceBundle) {
+                MessageToast.show(oResourceBundle.getText("odataNoChanges"));
+            }
+        }
     }
 
 }

@@ -2,9 +2,10 @@
 	<Panel id="controlIdEnFragmento">
 		<headerToolbar>
 			<Toolbar>
-				<core:Icon src="{= ${incidenceModel>status}==='0' ? 'accept' : ${incidenceModel>status}==='1' ? 'alert' : ${incidenceModel>status}==='2' ? 'decline' : ''}"/>
-				<Title text="{i18n>incidence} {incidenceModel>number} {path:'incidenceModel>date', formatter:'.formatter.dateFormat'}"></Title>
+				<core:Icon src="{= ${incidenceModel>Type}==='0' ? 'accept' : ${incidenceModel>Type}==='1' ? 'alert' : ${incidenceModel>Type}==='2' ? 'decline' : ''}"/>
+				<Title text="{i18n>incidence} {incidenceModel>IncidenceId} {path:'incidenceModel>CreationDate', formatter:'.formatter.dateFormat'}"></Title>
 				<ToolbarSpacer />
+				<Button icon="sap-icon://save" press="onSaveIncidence"/>
 				<core:Icon  src="delete" press="onDeleteIncidence"/>
 			</Toolbar>
 		</headerToolbar>
@@ -12,15 +13,15 @@
 			<HBox >
 				<VBox class="sapUiSmallMarginEnd">
 					<Text text="{i18n>incidenceDate}"></Text>
-					<DatePicker dateValue="{incidenceModel>date}"></DatePicker>
+					<DatePicker dateValue="{incidenceModel>CreationDate}"></DatePicker>
 				</VBox>
-				<VBox visible="{= ${incidenceModel>date} !== '' &amp;&amp; ${incidenceModel>date} !== undefined }" class="sapUiSmallMarginEnd">
+				<VBox visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined }" class="sapUiSmallMarginEnd">
 					<Text text="{i18n>incidenceReason}"></Text>
-					<Input ></Input>
+					<Input value="{incidenceModel>Reason}"></Input>
 				</VBox>
-				<VBox visible="{= ${incidenceModel>date} !== '' &amp;&amp; ${incidenceModel>date} !== undefined }" class="sapUiSmallMarginEnd">
+				<VBox visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined }" class="sapUiSmallMarginEnd">
 					<Text text="{i18n>incidenceType}"></Text>
-					<Select selectedKey="{incienceModel>status}" forceSelection="false" change="onStatusChange">
+					<Select selectedKey="{incienceModel>Type}" forceSelection="false" change="onStatusChange">
 						<core:Item key="0" text="{i18n>incidenceCorrect}"></core:Item>
 						<core:Item key="1" text="{i18n>incidencePending}"></core:Item>
 						<core:Item key="2" text="{i18n>incidenceError}"></core:Item>
