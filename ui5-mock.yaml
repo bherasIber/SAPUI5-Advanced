@@ -17,11 +17,13 @@ server:
           - path: /v2
             url: https://services.odata.org
             destination: Northwind
-          - path: /sap
+          - path: /sap/opu/odata/sap/YSAPUI5_SRV_01/
             url: http://erp13.sap4practice.com:9037
             client: "001"
-          - path: /v2/Northwind/Northwind.svc
-            url: https://services.odata.org
+          - path: /v2/Northwind/Northwind.svc/
+            url: https://services.odata.org/
+            destination: Northwind
+            authenticationType: NoAuthentication
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -42,13 +44,17 @@ server:
         mountPath: /
         services:
           - urlPath: /v2/Northwind/Northwind.svc
-            metadataPath: ./webapp/localService/Northwind/metadata.xml
-            mockdataPath: ./webapp/localService/Northwind/data
             generateMockData: true
+            metadataXmlPath: ./webapp/localService/Northwind/metadata.xml
+            mockdataRootPath: ./webapp/localService/Northwind/data
           - urlPath: /sap/opu/odata/sap/YSAPUI5_SRV_01/
             generateMockData: true
             metadataXmlPath: ./webapp/localService/YSAPUI5_SRV_01/metadata.xml
-            mockdataRootPath: ./webapp/localService/mockdata
+            mockdataRootPath: ./webapp/localService/YSAPUI5_SRV_01/mockdata
+          - urlPath: /v2/Northwind/Northwind.svc/
+            metadataPath: ./webapp/localService/Northwind/metadata.xml
+            mockdataPath: ./webapp/localService/Northwind/mockdata
+            generateMockData: true
         annotations: []
 builder:
   customTasks:

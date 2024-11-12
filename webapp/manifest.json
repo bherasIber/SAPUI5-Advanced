@@ -16,22 +16,22 @@
             "toolsId": "e682357c-700b-44ff-9329-dd28c72b484b"
         },
         "dataSources": {
-            "YSAPUI5_SRV_01": {
-                "uri": "/sap/opu/odata/sap/YSAPUI5_SRV_01/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [],
-                    "localUri": "localService/YSAPUI5_SRV_01/metadata.xml",
-                    "odataVersion": "2.0"
-                }
-            },
             "Northwind.svc": {
                 "uri": "/v2/Northwind/Northwind.svc/",
                 "type": "OData",
                 "settings": {
-                "annotations": [],
-                "localUri": "localService/metadata.xml",
-                "odataVersion": "2.0"
+                    "annotations": [],
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "YSAPUI5_SRV_01": {
+                "uri": "/sap/opu/odata/sap/YSAPUI5_SRV_01/",
+                "type": "OData", 
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "2.0",
+                    "localUri": "localService/YSAPUI5_SRV_01/metadata.xml"
                 }
             }
         }
@@ -72,7 +72,15 @@
                     "bundleName": "logaligroup.employees.i18n.i18n"
                 }
             },
+            "odataNorthwind": {
+                "dataSource": "Northwind.svc",
+                "preload": true,
+                "settings": {
+                "defaultBindingMode": "OneWay"
+                }
+            },
             "incidenceModel": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
                 "preload": true,
                 "dataSource": "YSAPUI5_SRV_01",
                 "settings": {
@@ -82,13 +90,6 @@
                     "metadataUrlParams": {
                         "sap-value-list": "none"
                     }
-                }
-            },
-            "odataNorthwind": {
-                "dataSource": "Northwind.svc",
-                "preload": true,
-                "settings": {
-                "defaultBindingMode": "OneWay"
                 }
             }
         },
