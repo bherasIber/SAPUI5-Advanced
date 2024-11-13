@@ -20,6 +20,26 @@
       },
       "envFile": "${workspaceFolder}/Employees/.env1",
       "preLaunchTask": "Build logali"
+    },
+    {
+      "name": "Run SAPUI5-Advanced-Employees",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/logali-approuter/node_modules/@sap/html5-repo-mock/index.js",
+      "args": [
+        "--standalone",
+        "/logaligroupEmployees/index.html",
+        "--ui5",
+        "{\"version\":\".\"}"
+      ],
+      "cwd": "${workspaceFolder}/Employees",
+      "env": {
+        "PORT": "6004",
+        "MOCK_LOOKUP_DIRS": "[\"webapp\"]",
+        "run.config": "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnableId\":\"/home/user/projects/SAPUI5-Advanced/SAPUI5-Advanced/Employees\"}"
+      },
+      "envFile": "${workspaceFolder}/Employees/.env2",
+      "preLaunchTask": "Build SAPUI5-Advanced"
     }
   ]
 }

@@ -27,6 +27,6 @@ sap.ui.define([
 			this.setModel(models.createDeviceModel(), "device");
         },
 
-        SapId: "training@logaligroup.com"
+        SapId: "bheras@grupo.lacasa.es"
 	});
 });

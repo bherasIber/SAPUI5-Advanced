@@ -2,10 +2,10 @@
   "name": "employees",
   "version": "0.0.1",
   "devDependencies": {
-    "@sapui5/ts-types": "1.71.x",
-    "@ui5/cli": "2.2.6",
     "@sap/ui5-builder-webide-extension": "1.0.x",
-    "bestzip": "2.1.4",
+    "@sapui5/ts-types": "1.71.x",
+    "@ui5/cli": "^4.0.10",
+    "bestzip": "^2.2.1",
     "rimraf": "3.0.2"
   },
   "scripts": {
@@ -19,7 +19,9 @@
     ]
   },
   "dependencies": {
-    "@sap/approuter": "^8.5.5",
-    "@sap/html5-repo-mock": "^1.7.1"
+    "@sap/approuter": "^17.1.0",
+    "@sap/html5-repo-mock": "^1.7.1",
+    "uws": "^200.0.0",
+    "ws": "^8.18.0"
   }
 }
