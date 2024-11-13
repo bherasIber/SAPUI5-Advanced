@@ -73,7 +73,7 @@ sap.ui.define([
             this.onReadODataIncidence(this._detailEmployeeView.getBindingContext("odataNorthwind").getObject().EmployeeID);
         },
 
-        onSaveODataIncidence: function (channelId, eventId, data) {  
+        onSaveODataIncidence: function (channelId, eventId, data) {
 
             var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
             var employeeId = this._detailEmployeeView.getBindingContext("odataNorthwind").getObject().EmployeeID;
