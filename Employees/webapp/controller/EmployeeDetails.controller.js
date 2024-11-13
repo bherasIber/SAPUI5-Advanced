@@ -53,7 +53,7 @@ sap.ui.define([
 
     function updateIncidenceType(oEvent) {
         var context = oEvent.getSource().getBindingContext("incidenceModel");
-        var contextObj = context.getObject();
+        var contextObj = context.getObject(); 
         contextObj.TypeX = true;
     };
 

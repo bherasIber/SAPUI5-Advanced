@@ -130,7 +130,7 @@ sap.ui.define([
             };
         },
 
-        onReadODataIncidence: function (employeeID) {
+        onReadODataIncidence: function (employeeID) { 
 
             this.getView().getModel("incidenceModel").read("/IncidentsSet", {
                 filters: [
@@ -151,7 +151,7 @@ sap.ui.define([
                         tableIncidence.addContent(newIncidence);
                     }
                 }.bind(this),
-                error: function (e) {
+                error: function (e) { 
                 }
             });
         }
