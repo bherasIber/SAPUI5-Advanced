@@ -2,7 +2,6 @@
           xmlns:mvc="sap.ui.core.mvc" 
           displayBlock="true" 
           xmlns="sap.m"
-          xmlns:core="sap.ui.core"
           xmlns:l="sap.ui.layout"
           xmlns:f="sap.ui.layout.form"
           xmlns:sc="logaligroup.Employees.control">
@@ -64,5 +63,11 @@
                 <List items="{path: 'oDataNorthwind>OrderDetails', parameters:{expand: 'Products'}, factory: '.factoryOrderDetails'}"/>
             </Panel>
         </content>
+        <footer>
+            <Toolbar >
+                <ToolbarSpacer ></ToolbarSpacer>
+                <Button text="{i18n>saveSignature}" press="onSaveSignature"></Button>
+            </Toolbar>
+        </footer>
     </Page>
 </mvc:View>
