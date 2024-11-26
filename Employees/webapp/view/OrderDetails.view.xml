@@ -61,7 +61,7 @@
                 </l:Grid>
             </Panel>
             <Panel headerText="{i18n>orderProducts}">
-                <List items="{path: 'oDataNorthwind>OrdersDetails', parameters:{expand: 'Product'}, factory: '.factoryOrderDetails'}"/>
+                <List items="{path: 'oDataNorthwind>OrderDetails', parameters:{expand: 'Products'}, factory: '.factoryOrderDetails'}"/>
             </Panel>
         </content>
     </Page>
