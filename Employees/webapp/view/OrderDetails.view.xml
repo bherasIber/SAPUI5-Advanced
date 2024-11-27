@@ -58,6 +58,17 @@
                         <Button text="{i18n>clear}" press="onClearSignature" class="sapUiTinyMarginBegin"></Button>
                     </FlexBox>
                 </l:Grid>
+                <UploadCollection id="uploadCollection"
+                                    maximumFileSize="10"
+                                    maximumFilenameLength="55"
+                                    multiple="true"
+                                    sameFilenameAllowed="true"
+                                    instantUpload="true"
+                                    uploadUrl="/sap/opu/odata/sap/YSAPUI5_SRV_01/FilesSet"
+                                    change="onFileChange"
+                                    uploadComplete="onFileUploadComplete"
+                                    beforeUploadStarts="onFileBeforeUpload"
+                                    fileDeleted="onFileDeleted"/>
             </Panel>
             <Panel headerText="{i18n>orderProducts}">
                 <List items="{path: 'oDataNorthwind>OrderDetails', parameters:{expand: 'Products'}, factory: '.factoryOrderDetails'}"/>

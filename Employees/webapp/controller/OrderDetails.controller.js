@@ -2,8 +2,16 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/routing/History",
-    "sap/m/MessageBox"
-], function (Controller, History, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+], 
+    /**
+     * @param {typeof sap.ui.core.mvc.Controller} Controller
+     * @param {typeof sap.ui.model.Filter} Filter
+     * @param {typeof sap.ui.model.FilterOperator} FilterOperator
+     */
+function (Controller, History, MessageBox, Filter, FilterOperator) {
 
     function _onObjectMatched(oEvent) {
         this.onClearSignature();
@@ -25,6 +33,8 @@ sap.ui.define([
     };
 
     function _readSignature(orderId, emplyeeId){
+
+        //Read signature image
         this.getView().getModel("incidenceModel").read("/SignatureSet(OrderId='" + orderId + "',SapId='" + this.getOwnerComponent().SapId + "',EmployeeId='" + emplyeeId + "')", {
             success: function(data){
                 const signature = this.getView().byId("signature");
@@ -35,7 +45,22 @@ sap.ui.define([
             error: function(data){
 
             }
-        })
+        });
+
+        //Bin files
+        this.byId("uploadCollection").bindAggregation("items", {
+            path: "incidenceModel>/FilesSet",
+            filters: [
+                new Filter("OrderId", FilterOperator.EQ, orderId),
+                new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId),
+                new Filter("EmployeeId", FilterOperator.EQ, emplyeeId)
+            ],
+            template: new sap.m.UploadCollectionItem({
+                documentId: "{icidenceModel>AttId}",
+                visibleEdit: false,
+                fileName: "{incidenceModel>FileName}"
+            }).attachPress(this.downloadFile)
+        });
     };
 
     return Controller.extend("logaligroup.Employees.controller.OrderDetails", {
@@ -56,7 +81,7 @@ sap.ui.define([
             };
         },
 
-        onClearSignature: function (oEvent) {
+        onClearSignature: function (oEvent) { 
             var signature = this.byId("signature");
             signature.clear();
         },
@@ -116,6 +141,31 @@ sap.ui.define([
                     }
                 })
             };
-        }
+        },
+
+        onFileBeforeUpload : function(oEvent) {
+            let fileName = oEvent.getParameter("fileName");
+            let objContext = oEvent.getSource().getBindingContext("odataNorthwind").getObject();
+            let oCustomerHeaderSlug = new sap.m.UploadCollectionParameter({
+                name : "slug",
+                value :  objContext.OrderID + ";" + this.getOwnerComponent().SapId + ";" + objContext.EmployeeID + ";" + fileName
+            });
+            oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);
+        },
+
+        onFileChange: function(oEvent){
+            let oUploadCollection = oEvent.getSource();
+
+            //Header token CSRF
+            let oCustomerHeaderToken = new sap.m.UploadCollectionParameter({ 
+                name: "x-csrf-token",
+                value: this.getView().getModel("incidenceModel").getSecurityToken()
+            });
+            oUploadCollection.addHeaderParameter(oCustomerHeaderToken);
+        },
+
+        onFileUploadComplete: function(oEvent){
+            oEvent.getSource().getBinding("items").refresh();
+        },
     });
 });
