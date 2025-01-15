@@ -12,6 +12,7 @@ modules:
   parameters:
     disk-quota: 256M
     memory: 256M
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack
 - name: rrhh_ui_deployer
   type: com.sap.application.content
   path: .

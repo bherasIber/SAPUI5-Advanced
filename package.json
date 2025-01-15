@@ -16,6 +16,7 @@
     ]
   },
   "dependencies": {
-    "@sap/html5-repo-mock": "^2.1.10"
+    "@sap/html5-repo-mock": "^2.1.10",
+    "node": "^20.18.0"
   }
 }
