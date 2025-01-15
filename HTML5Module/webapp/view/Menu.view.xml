@@ -12,7 +12,7 @@
 							</GenericTile>
 						</Panel>
 						<Panel headerText="{i18n>pedidos}"  expandable="true" expanded="true">
-							<GenericTile id="linkFirmarPedido"  headerImage="sap-icon://signature" class="sapUiTinyMarginBegin sapUiTinyMarginTop" url="http://61c38317trial-dev-logali-approuter.cfapps.us10.hana.ondemand.com/logaligroupEmployees/index.html">
+							<GenericTile id="linkFirmarPedido"  headerImage="sap-icon://signature" class="sapUiTinyMarginBegin sapUiTinyMarginTop" url="https://61c38317trial-dev-logali-approuter.cfapps.us10.hana.ondemand.com/logaligroupEmployees/index.html">
 								<TileContent footer="{i18n>firmarPedido}">
 								</TileContent>
 							</GenericTile>

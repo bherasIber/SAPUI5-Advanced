@@ -80,7 +80,7 @@ sap.ui.define([
 		var odata = newRise.getData();
 		//Se prepara la informacion para enviar a sap y se agrega el campo sapId con el id del alumno y el id del empleado
 		var body = {
-			Ammount : odata.Ammount,
+			Amount : odata.Ammount,
 			CreationDate : odata.CreationDate,
 			Comments : odata.Comments,
 			SapId : this.getOwnerComponent().SapId,

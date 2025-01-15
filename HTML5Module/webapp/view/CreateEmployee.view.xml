@@ -84,7 +84,7 @@
 											<Label text="{i18n>comentario}" width="100%"></Label>
 											<TextArea value="{/Comments}" width="100%"></TextArea>
 											<UploadCollection
-													id="UploadCollection"
+													id="UploadCollectionCE"
 													maximumFilenameLength="55"
 													maximumFileSize="10"
 													multiple="true"
@@ -94,7 +94,7 @@
 													change="onChange"
 													beforeUploadStarts="onBeforeUploadStart"
 													noDataDescription="{i18n>Arrastrarficheros}" />
-
+											
 										</WizardStep>
 									</Wizard>
 								</content>

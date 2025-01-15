@@ -158,7 +158,7 @@ sap.ui.define([
 				var wizardNavContainer = this.byId("wizardNavContainer");
 				wizardNavContainer.to(this.byId("ReviewPage"));
 				//Se obtiene los archivos subidos
-				var uploadCollection = this.byId("UploadCollection");
+				var uploadCollection = this.byId("UploadCollectionCE");
 				var files = uploadCollection.getItems();
 				var numFiles = uploadCollection.getItems().length;
 				this._model.setProperty("/_numFiles",numFiles);
@@ -219,10 +219,16 @@ sap.ui.define([
 		}
         body.SapId = this.getOwnerComponent().SapId;
 		body.UserToSalary = [{
-			Ammount : parseFloat(json._Salary).toString(),
+			Amount : parseFloat(json._Salary).toString(),
 			Comments : json.Comments,
 			Waers : "EUR"
 		}];
+
+		body.UserToAttachment = [{
+			DocName : json._files[0].DocName,
+			MimeType : json._files[0].MimeType
+		}];
+
 		this.getView().setBusy(true);
 		this.getView().getModel("odataModel").create("/Users",body,{
 			success : function(data){
@@ -282,18 +288,27 @@ sap.ui.define([
 	
 	//Función que se ejecuta por cada fichero que se va a subir a sap
 	//Se debe agregar el parametro de cabecera "slug" con el valor "id de sap del alumno",id del nuevo usuario y nombre del fichero, separados por ;
-	 function onBeforeUploadStart (oEvent) {
+	function onBeforeUploadStart (oEvent) {
 	   var oCustomerHeaderSlug = new UploadCollectionParameter({
 				name: "slug",
 				value: this.getOwnerComponent().SapId+";"+this.newUser+";"+oEvent.getParameter("fileName")
 			});
 			oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);
-	  }
+			
+	}
 	  
-	  function onStartUpload (ioNum) {
-	   var that = this;
-	   var oUploadCollection = that.byId("UploadCollection");
-	   oUploadCollection.upload();
+	  function onStartUpload () {
+	   //var that = this;
+	   //var oUploadCollection = that.byId("UploadCollectionCE");
+	   //oUploadCollection.upload();
+
+	   var oUploadCollection = this.byId("UploadCollectionCE");
+		if (oUploadCollection) {
+			oUploadCollection.upload();
+		} else {
+			console.error("UploadCollection no encontrada.");
+		}
+
 	  }
 	
 	return Controller.extend("logaligroup.rrhh.controller.CreateEmployee", {
